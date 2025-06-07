@@ -1,0 +1,41 @@
+{
+  "name": "app-shopping-list",
+  "version": "1.0.0",
+  "description": "A simple app for managing a shopping list.",
+  "main": "index.js",
+  "scripts": {
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "dev:shared": "cd shared && npm run dev",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "build:shared": "cd shared && npm run build",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\" \"npm run dev:shared\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run build:shared && npm run build:server"
+  },
+  "workspaces": [
+    "./client",
+    "./server",
+    "./shared"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airich-design/app-shopping-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/airich-design/app-shopping-list/issues"
+  },
+  "homepage": "https://github.com/airich-design/app-shopping-list#readme",
+  "devDependencies": {
+    "bun-types": "latest",
+    "concurrently": "^9.1.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
