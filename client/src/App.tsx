@@ -4,55 +4,35 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import type { ShoppingItem } from "@shopping-list/shared";
+import {
+  useShoppingItems,
+  useCreateShoppingItem,
+  useUpdateShoppingItem,
+  useDeleteShoppingItem,
+} from "@/hooks/useShoppingItems";
+import { Trash2Icon } from "lucide-react";
 
 function App() {
-  const [items, setItems] = useState<ShoppingItem[]>([
-    {
-      _id: "1",
-      name: "Milk",
-      bought: false,
-      createdAt: new Date(),
-    },
-    {
-      _id: "2",
-      name: "Bread",
-      bought: true,
-      createdAt: new Date(),
-    },
-    {
-      _id: "3",
-      name: "Eggs",
-      bought: false,
-      createdAt: new Date(),
-    },
-  ]);
-
   const [newItemName, setNewItemName] = useState("");
+
+  const { data, isLoading } = useShoppingItems();
+  const items = data?.data ?? [];
+  const { mutate: createItem } = useCreateShoppingItem();
+  const { mutate: updateItem } = useUpdateShoppingItem();
+  const { mutate: deleteItem } = useDeleteShoppingItem();
 
   const handleAddItem = () => {
     if (!newItemName.trim()) return;
-
-    const newItem: ShoppingItem = {
-      _id: crypto.randomUUID(),
-      name: newItemName.trim(),
-      bought: false,
-      createdAt: new Date(),
-    };
-
-    setItems((prev) => [...prev, newItem]);
+    createItem(newItemName.trim());
     setNewItemName("");
   };
 
-  const handleToggleItem = (itemId: string) => {
-    setItems((prev) =>
-      prev.map((item) =>
-        item._id === itemId ? { ...item, bought: !item.bought } : item
-      )
-    );
+  const handleToggleItem = (itemId: string, currentBought: boolean) => {
+    updateItem({ id: itemId, bought: !currentBought });
   };
 
   const handleRemoveItem = (itemId: string) => {
-    setItems((prev) => prev.filter((item) => item._id !== itemId));
+    deleteItem(itemId);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -60,6 +40,14 @@ function App() {
       handleAddItem();
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-gray-500">Loading shopping list...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -83,7 +71,7 @@ function App() {
             </div>
 
             <div className="space-y-4">
-              {items.map((item) => (
+              {items.map((item: ShoppingItem) => (
                 <div
                   key={item._id}
                   className="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm border"
@@ -91,7 +79,9 @@ function App() {
                   <div className="flex items-center gap-3">
                     <Checkbox
                       checked={item.bought}
-                      onCheckedChange={() => handleToggleItem(item._id)}
+                      onCheckedChange={() =>
+                        handleToggleItem(item._id, item.bought)
+                      }
                     />
                     <span
                       className={`${
@@ -102,11 +92,11 @@ function App() {
                     </span>
                   </div>
                   <Button
-                    variant="destructive"
+                    variant="outline-destructive"
                     size="sm"
                     onClick={() => handleRemoveItem(item._id)}
                   >
-                    Remove
+                    <Trash2Icon className="size-4" />
                   </Button>
                 </div>
               ))}
