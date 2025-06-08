@@ -1,13 +1,16 @@
 {
-  "name": "shared",
-  "version": "0.0.1",
+  "name": "@shopping-list/shared",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
   },
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  },
   "devDependencies": {
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   }
 }
