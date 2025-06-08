@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: shopping-list-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    networks:
+      - shopping-list-network
+
+volumes:
+  mongodb_data:
+    name: shopping-list-mongodb-data
+
+networks:
+  shopping-list-network:
+    name: shopping-list-network
+    driver: bridge 
