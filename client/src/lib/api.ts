@@ -4,7 +4,7 @@ import type {
   ShoppingItemResponse,
   ShoppingItemsResponse,
 } from "@shopping-list/shared";
-import { API_ENDPOINTS } from "@shopping-list/shared";
+import { API_ENDPOINTS } from "./constants";
 
 // Create axios instance
 export const api = axios.create({

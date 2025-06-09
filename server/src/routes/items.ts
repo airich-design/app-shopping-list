@@ -18,14 +18,12 @@ router.get("/", async (_req, res) => {
       data: items,
       message: "Items fetched successfully",
       success: true,
-      timestamp: new Date().toISOString(),
     };
     res.json(response);
   } catch (error) {
     const response: ShoppingItemsResponse = {
       message: error instanceof Error ? error.message : "Unknown error",
       success: false,
-      timestamp: new Date().toISOString(),
     };
     res.status(500).json(response);
   }
@@ -41,16 +39,14 @@ router.post("/", async (req, res) => {
       data: savedItem,
       message: "Item created successfully",
       success: true,
-      timestamp: new Date().toISOString(),
     };
     res.status(201).json(response);
   } catch (error) {
     const response: ShoppingItemResponse = {
       message: error instanceof Error ? error.message : "Unknown error",
       success: false,
-      timestamp: new Date().toISOString(),
     };
-    res.status(400).json(response);
+    res.status(500).json(response);
   }
 });
 
@@ -68,7 +64,6 @@ router.put("/:id", (async (req, res) => {
       const response: ShoppingItemResponse = {
         message: "Item not found",
         success: false,
-        timestamp: new Date().toISOString(),
       };
       return res.status(404).json(response);
     }
@@ -76,16 +71,14 @@ router.put("/:id", (async (req, res) => {
       data: updatedItem,
       message: "Item updated successfully",
       success: true,
-      timestamp: new Date().toISOString(),
     };
     res.json(response);
   } catch (error) {
     const response: ShoppingItemResponse = {
       message: error instanceof Error ? error.message : "Unknown error",
       success: false,
-      timestamp: new Date().toISOString(),
     };
-    res.status(400).json(response);
+    res.status(500).json(response);
   }
 }) as RequestHandler<{ id: string }, any, UpdateShoppingItemRequest>);
 
@@ -98,23 +91,20 @@ router.delete("/:id", (async (req, res) => {
       const response: ShoppingItemResponse = {
         message: "Item not found",
         success: false,
-        timestamp: new Date().toISOString(),
       };
       return res.status(404).json(response);
     }
     const response: ApiResponse = {
       message: "Item deleted successfully",
       success: true,
-      timestamp: new Date().toISOString(),
     };
     res.json(response);
   } catch (error) {
     const response: ShoppingItemResponse = {
       message: error instanceof Error ? error.message : "Unknown error",
       success: false,
-      timestamp: new Date().toISOString(),
     };
-    res.status(400).json(response);
+    res.status(500).json(response);
   }
 }) as RequestHandler<{ id: string }>);
 

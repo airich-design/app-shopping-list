@@ -31,6 +31,7 @@
     "@types/cors": "^2.8.19",
     "@types/mongoose": "^5.11.96",
     "cors": "^2.8.5",
+    "express-rate-limit": "^7.5.0",
     "mongoose": "^8.15.1"
   }
 }

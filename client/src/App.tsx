@@ -7,7 +7,16 @@ function App() {
     <ThemeProvider>
       <div className="min-h-screen bg-background text-foreground antialiased transition-colors">
         <ThemeToggle />
-        <ShoppingList />
+        <div className="flex flex-col items-center justify-center gap-4 pt-12 w-full">
+          <div className="relative">
+            <img
+              src="/logo.svg"
+              alt="Logo"
+              className="size-24 object-contain"
+            />
+          </div>
+          <ShoppingList />
+        </div>
       </div>
     </ThemeProvider>
   );

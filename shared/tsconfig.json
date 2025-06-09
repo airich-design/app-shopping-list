@@ -3,8 +3,9 @@
   "compilerOptions": {
     // Environment setup
     "lib": ["ESNext"],
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "ES2018",
+    "module": "CommonJS",
+    "rootDir": "src",
 
     // Output configuration
     "declaration": true,
