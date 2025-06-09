@@ -91,14 +91,9 @@ npm run start
 
 1. Stop the development servers by pressing `Ctrl+C` in their respective terminal windows.
 
-2. Stop the MongoDB container:
+2. Stop and removes containers created by up.
 ```bash
-docker-compose down
-```
-
-To remove all MongoDB data:
-```bash
-docker-compose down -v
+docker compose down
 ```
 
 ## 🛠️ Tech Stack
