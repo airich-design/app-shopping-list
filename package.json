@@ -11,6 +11,11 @@
     "build:server": "cd server && npm run build",
     "build:shared": "cd shared && npm run build",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\" \"npm run dev:shared\"",
+    "build": "concurrently \"npm run build:client\" \"npm run build:server\" \"npm run build:shared\"",
+    "start:client": "cd client && npm run start",
+    "start:server": "cd server && npm run start",
+    "start:shared": "cd shared && npm run start",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\" \"npm run start:shared\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build:shared && npm run build:server"
   },

@@ -11,8 +11,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Connect to MongoDB
-const MONGODB_URI =
-  "mongodb://root:example@localhost:27017/shopping-list?authSource=admin";
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  throw new Error("MONGODB_URI is not defined");
+}
+
 mongoose
   .connect(MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
