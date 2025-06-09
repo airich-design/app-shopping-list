@@ -31,8 +31,7 @@ First, install dependencies for all parts of the application:
 
 ```bash
 # installs all needed dependencies
-# --force is required due to React 19 and potential peer dependency conflicts with Shadcn UI components
-npm i --force
+npm i
 ```
 
 ### 2️⃣ Database Setup
@@ -41,7 +40,7 @@ The application uses MongoDB running in Docker:
 
 1. Start the MongoDB container:
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
 2. The MongoDB instance will be available at:
