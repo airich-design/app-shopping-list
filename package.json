@@ -17,7 +17,8 @@
     "start:shared": "cd shared && npm run start",
     "start": "concurrently \"npm run start:client\" \"npm run start:server\" \"npm run start:shared\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm run build:shared && npm run build:server"
+    "postinstall": "npm run build:shared && npm run build:server",
+    "clean": "rm -rf node_modules && rm -rf client/node_modules && rm -rf server/node_modules && rm -rf shared/node_modules"
   },
   "workspaces": [
     "./client",
@@ -37,7 +38,6 @@
   },
   "homepage": "https://github.com/airich-design/app-shopping-list#readme",
   "devDependencies": {
-    "bun-types": "latest",
     "concurrently": "^9.1.2"
   },
   "peerDependencies": {
