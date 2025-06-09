@@ -24,6 +24,10 @@ function ShoppingListContent() {
 
   const { data, isLoading } = useShoppingItems();
   const items = data?.data ?? [];
+  const sortedItems = [...items].sort((a, b) => {
+    if (a.bought === b.bought) return 0;
+    return a.bought ? 1 : -1;
+  });
   const { mutate: createItem } = useCreateShoppingItem();
   const { mutate: updateItem } = useUpdateShoppingItem();
   const { mutate: deleteItem } = useDeleteShoppingItem();
@@ -57,11 +61,11 @@ function ShoppingListContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          style={{ color: "rgb(107 114 128)" }}
+          className="text-muted-foreground"
         >
           <Loader2 className="animate-spin mx-auto my-4" />
           Loading shopping list...
@@ -71,7 +75,7 @@ function ShoppingListContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-background py-8">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -97,18 +101,31 @@ function ShoppingListContent() {
               </div>
 
               <motion.div
-                style={{ marginTop: "1rem", marginBottom: "1rem" }}
+                className="mt-4 mb-4 space-y-2"
                 initial={false}
                 animate={{ opacity: 1 }}
               >
                 <AnimatePresence mode="popLayout">
-                  {items.map((item) => (
-                    <ShoppingItem
+                  {sortedItems.map((item) => (
+                    <motion.div
                       key={item._id}
-                      item={item}
-                      onToggle={handleToggleItem}
-                      onRemove={(_id) => deleteItem(_id)}
-                    />
+                      layout
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 35,
+                        opacity: { duration: 0.2 },
+                      }}
+                    >
+                      <ShoppingItem
+                        item={item}
+                        onToggle={handleToggleItem}
+                        onRemove={(_id) => deleteItem(_id)}
+                      />
+                    </motion.div>
                   ))}
                 </AnimatePresence>
 
@@ -116,7 +133,7 @@ function ShoppingListContent() {
                   <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    style={{ textAlign: "center", color: "rgb(107 114 128)" }}
+                    className="text-center text-muted-foreground"
                   >
                     Your shopping list is empty. Add some items!
                   </motion.p>

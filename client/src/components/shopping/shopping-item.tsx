@@ -23,26 +23,10 @@ export function ShoppingItem({ item, onToggle, onRemove }: ShoppingItemProps) {
         transition: { duration: 0.2 },
       }}
       whileHover={{ scale: 1.02 }}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "1rem",
-        backgroundColor: "white",
-        borderRadius: "0.5rem",
-        boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
-        border: "1px solid #e5e7eb",
-        marginBottom: "1rem",
-      }}
+      className="flex items-center justify-between p-4 mb-4 rounded-lg border bg-card text-card-foreground shadow-sm transition-colors"
     >
       <div className="flex items-center gap-3">
-        <motion.div
-          whileTap={{ scale: 0.9 }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
+        <motion.div whileTap={{ scale: 0.9 }} className="flex items-center">
           <Checkbox
             checked={item.bought}
             onCheckedChange={() => onToggle(item._id, item.bought)}
@@ -54,12 +38,17 @@ export function ShoppingItem({ item, onToggle, onRemove }: ShoppingItemProps) {
             textDecoration: item.bought ? "line-through" : "none",
           }}
           transition={{ duration: 0.2 }}
+          className="text-foreground"
         >
           {item.name}
         </motion.span>
       </div>
       <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-        <Button variant="outline" size="sm" onClick={() => onRemove(item._id)}>
+        <Button
+          variant="outline-destructive"
+          size="sm"
+          onClick={() => onRemove(item._id)}
+        >
           <Trash2Icon className="size-4" />
         </Button>
       </motion.div>

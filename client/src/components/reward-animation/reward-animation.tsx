@@ -70,7 +70,7 @@ export function RewardAnimation({ onTrigger }: RewardAnimationProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, delay: 0.2 }}
-              className="text-[clamp(0.875rem,4vw,1.25rem)] text-[#1a1a1a]/80 font-sans leading-relaxed max-w-full overflow-hidden text-ellipsis whitespace-nowrap"
+              className="text-[clamp(0.875rem,4vw,1.25rem)] text-[#1a1a1a]/80 font-sans leading-relaxed max-w-full overflow-hidden text-ellipsis whitespace-nowrap dark:text-white"
             >
               Your shopping list is complete
             </motion.p>
