@@ -98,7 +98,7 @@ docker compose down
 
 ## 🛠️ Tech Stack
 
-- **Frontend** 🎨:
+- **Frontend (client)** 🎨:
   - ⚛️ React
   - 📝 TypeScript
   - ⚡ Vite
@@ -107,13 +107,12 @@ docker compose down
   - 🎪 Radix UI
   - 🔄 React Query
 
-- **Backend** 🔧:
+- **Backend (server)** 🔧:
   - 💚 Node.js
   - 🚂 Express
   - 📝 TypeScript
   - 🍃 MongoDB with Mongoose
   - 🔄 CORS
-  - ⚖️ Rate Limiting
   - 🔄 concurrently
 
 - **Shared** 🤝:
